@@ -90,13 +90,27 @@ void clock_kg(int r[], int s[], int MIXING, int entrada){
 	int ENTRADA_R, ENTRADA_S = 0;
 
 	if(MIXING){
-		entrada = xor(entrada, s[50]);
+		ENTRADA_R = xor(entrada, s[50]);
 	}else{
 		ENTRADA_R = entrada;
 	}
 	ENTRADA_S = entrada;
 	clock_r(r, ENTRADA_R, CONTROL_R);
-	clock_s(r, ENTRADA_S, CONTROL_S);
+	clock_s(s, ENTRADA_S, CONTROL_S);
+}
+
+void key_load_initialization(){
+	for(int i = 0; i <100; i++){
+		clock_kg(R,S,1,IV[i]);
+	}
+	
+	for(int i = 0; i <80; i++){
+		clock_kg(R,S,1,KEY[i]);
+	}
+	
+	for(int i = 0; i <100; i++){
+		clock_kg(R,S,1,0);
+	}
 }
 
 
@@ -106,6 +120,9 @@ int main(){
 	inicializar_vector(R, 100);
 	inicializar_vector(S, 100);
 	inicializar_vector(Z, 100);
+	
+
+
 
 	// Se deben ingresar los vectores para el key y el vector de inicializacion.
 
@@ -115,18 +132,42 @@ int main(){
 
 	
 
-	printf("El valor del xor es %d\n", xor(1,0));
-	printf("El valor del and es %d\n", and(1,1));
-	printf("tamaño del array %d\n", SIZE_RTAPS);
+	// printf("El valor del xor es %d\n", xor(1,0));
+	// printf("El valor del and es %d\n", and(1,1));
+	// printf("tamaño del array %d\n", SIZE_RTAPS);
 
-	printf("tamaño del array %d\n", SIZE_COMP0);
-	printf("tamaño del array %d\n", SIZE_COMP1);
-	printf("tamaño del array %d\n", incluido_en_RTAPS(14));
+	// printf("tamaño del array %d\n", SIZE_COMP0);
+	// printf("tamaño del array %d\n", SIZE_COMP1);
+	// printf("tamaño del array %d\n", incluido_en_RTAPS(14));
 
 	/*for(int i = 0; i < SIZE_RTAPS; i++){
 		printf("valor: %d\n", RTAPS[i] );
 	}
-*/
+*/	
+
+	for(int j = 0; j< 100; j++){
+		R[j] = j % 2;
+	}
+
+	for(int j = 0; j< 80; j++){
+		IV[j] = j;
+	}
+
+	for(int j = 80; j> 0; j--){
+		KEY[j] = j;
+	}
+
+	key_load_initialization();
+
+	for(int j = 0; j< 99; j++){
+		Z[j] = xor(R[0],S[0]);
+		printf("R %d - %d \n ", j, R[j]);
+		clock_kg(R,S,0,0);
+	}
+
+	for(int k=0;k<100;k++){
+		printf("%d\n", KEY[k] );
+	}
 
 	return 0;
 }
