@@ -83,6 +83,22 @@ void clock_s(int s[], int s_entrada, int s_control){
 	s = s1;
 }
 
+void clock_kg(int r[], int s[], int MIXING, int entrada){
+
+	int CONTROL_R = xor(s[34], r[67]);
+	int CONTROL_S = xor(s[67], r[33]);
+	int ENTRADA_R, ENTRADA_S = 0;
+
+	if(MIXING){
+		entrada = xor(entrada, s[50]);
+	}else{
+		ENTRADA_R = entrada;
+	}
+	ENTRADA_S = entrada;
+	clock_r(r, ENTRADA_R, CONTROL_R);
+	clock_s(r, ENTRADA_S, CONTROL_S);
+}
+
 
 
 int main(){
@@ -91,6 +107,13 @@ int main(){
 	inicializar_vector(S, 100);
 	inicializar_vector(Z, 100);
 
+	// Se deben ingresar los vectores para el key y el vector de inicializacion.
+
+
+
+	// Se aplica el algoritmo
+
+	
 
 	printf("El valor del xor es %d\n", xor(1,0));
 	printf("El valor del and es %d\n", and(1,1));
