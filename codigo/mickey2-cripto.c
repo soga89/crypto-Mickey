@@ -18,8 +18,9 @@ int FB1[] = {1,1,1,0,1,1,1,0,0,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,1,1,0,0,1,0,1,1
 int SIZE_FB1 = (int)(sizeof(FB1) / sizeof(FB1[0]));
 
 
-// Se declara la llave y el vector de inicializacion que deben tener 80 caracterres
-int KEY[80], IV[80];
+// Se declara la llave y el vector de inicializacion que por ahora tendran 10 y 4 caracteres
+int KEY[] ={1,1,1,1,0,1,0,1,0,1};
+int IV[] ={1,1,0,1};
 
 // Registros que generaran la clave, son de 100 posiciones
 int R[100],S[100];
@@ -100,11 +101,11 @@ void clock_kg(int r[], int s[], int MIXING, int entrada){
 }
 
 void key_load_initialization(){
-	for(int i = 0; i <100; i++){
+	for(int i = 0; i <4; i++){
 		clock_kg(R,S,1,IV[i]);
 	}
 	
-	for(int i = 0; i <80; i++){
+	for(int i = 0; i <10; i++){
 		clock_kg(R,S,1,KEY[i]);
 	}
 	
@@ -113,61 +114,38 @@ void key_load_initialization(){
 	}
 }
 
+void keystream_generation(){
+	for(int j = 0; j< 99; j++){
+		Z[j] = xor(R[0],S[0]);
+		clock_kg(R,S,0,0);
+	}
+}
 
+
+void test_funciones(){
+	printf("El valor del xor es %d\n", xor(1,0));
+	printf("El valor del and es %d\n", and(1,1));
+	printf("tamaño del array %d\n", SIZE_RTAPS);
+	printf("tamaño del array %d\n", SIZE_COMP0);
+	printf("tamaño del array %d\n", SIZE_COMP1);
+	printf("tamaño del array %d\n", incluido_en_RTAPS(14));
+}
 
 int main(){
+
+	// INICIALIZACION 
 
 	inicializar_vector(R, 100);
 	inicializar_vector(S, 100);
 	inicializar_vector(Z, 100);
 	
-
-
+	// test_funciones();
 
 	// Se deben ingresar los vectores para el key y el vector de inicializacion.
-
-
-
-	// Se aplica el algoritmo
-
-	
-
-	// printf("El valor del xor es %d\n", xor(1,0));
-	// printf("El valor del and es %d\n", and(1,1));
-	// printf("tamaño del array %d\n", SIZE_RTAPS);
-
-	// printf("tamaño del array %d\n", SIZE_COMP0);
-	// printf("tamaño del array %d\n", SIZE_COMP1);
-	// printf("tamaño del array %d\n", incluido_en_RTAPS(14));
-
-	/*for(int i = 0; i < SIZE_RTAPS; i++){
-		printf("valor: %d\n", RTAPS[i] );
-	}
-*/	
-
-	for(int j = 0; j< 100; j++){
-		R[j] = j % 2;
-	}
-
-	for(int j = 0; j< 80; j++){
-		IV[j] = j;
-	}
-
-	for(int j = 80; j> 0; j--){
-		KEY[j] = j;
-	}
-
 	key_load_initialization();
 
-	for(int j = 0; j< 99; j++){
-		Z[j] = xor(R[0],S[0]);
-		printf("R %d - %d \n ", j, R[j]);
-		clock_kg(R,S,0,0);
-	}
-
-	for(int k=0;k<100;k++){
-		printf("%d\n", KEY[k] );
-	}
+	// Se aplica el algoritmo
+	keystream_generation();
 
 	return 0;
 }
