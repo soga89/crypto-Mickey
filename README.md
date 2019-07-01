@@ -1,9 +1,7 @@
 # crypto-Mickey
 
-# para compilar
+abrir el codigo con el eclipse. se le debe colocar variable de programa el path a la imagen bmp.
 
-gcc mickey2-cripto.c -o mickey
+la imagen encriptada estara en la misma direccion que la imagen pasada, solo que con el nombre modificado.
 
-# para correr desde linux
-
-./mickey
+se adapto para que funcione con imagenes bmp simplemente.
