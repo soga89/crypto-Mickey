@@ -18,6 +18,9 @@ namespace Mickey
         public Form1()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,9 +35,16 @@ namespace Mickey
                 System.Diagnostics.Process process1 = new System.Diagnostics.Process();
                 process1.StartInfo.UseShellExecute = true;
                 process1.StartInfo.FileName = "cypher.exe";
-                process1.StartInfo.Arguments = ruta.Text;
+                process1.StartInfo.Arguments = this.ruta.Text;
                 process1.Start();
                 process1.WaitForExit();
+                if (process1.ExitCode == 0)
+                {
+                    System.Windows.Forms.MessageBox.Show("LA IMAGEN SE PROCESO CORRECTAMENTE", "OK", System.Windows.Forms.MessageBoxButtons.OK);
+                }
+                else {
+                    System.Windows.Forms.MessageBox.Show("HUBO UN PROBLEMA AL PROCESAR LA IMAGEN", "ERROR", System.Windows.Forms.MessageBoxButtons.OK);
+                }
                 process1.Close();
             }
 
@@ -60,9 +70,17 @@ namespace Mickey
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ruta.Text = openFileDialog1.FileName;
+                this.pictureBox1_Click(sender, e);
             }
         }
 
-      
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.ruta.Text != "") {
+                this.pictureBox1.Image = Image.FromFile(this.ruta.Text);
+                this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                this.Controls.Add(this.pictureBox1);
+            }
+        }
     }
 }
