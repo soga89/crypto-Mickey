@@ -1,0 +1,9 @@
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\bin\Debug\Mickey.exe.config
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\bin\Debug\Mickey.exe
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\bin\Debug\Mickey.pdb
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Mickey.Form1.resources
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Mickey.Properties.Resources.resources
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Front.csproj.GenerateResource.cache
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Front.csproj.CoreCompileInputs.cache
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Mickey.exe
+C:\Users\nicotosco\Desktop\MickeyFront\Mickey\obj\Debug\Mickey.pdb
