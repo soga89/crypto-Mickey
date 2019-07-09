@@ -15,6 +15,10 @@ typedef struct{
     int ivsize;
 } CONF;
 
+void init_regs();
+void setear_key(CONF *conf, const unsigned char *key, unsigned int keysize, unsigned int ivsize);
+//void setear_iv(CONF *conf, const unsigned char *iv) ;
+
 void encrypt_desencrypt_data(CONF*, const unsigned char*, const unsigned char*, unsigned char*, unsigned int);
 
 

@@ -2,6 +2,7 @@
 #include <fcntl.h>
 //#include <sys/mman.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "mickey.h"
 
@@ -51,14 +52,14 @@ int main(int argc, char** argv) {
 	    return 0;
 	}
 
-	setear_iv(conf, iv);
+	//setear_iv(conf, iv);
 
-	unsigned char* copiar(unsigned char* m){
-		unsigned char *a;
-			for (int j = 0; j < 8; j++)
-				a = ((int) a) ^ CLOCK_KG(conf, 0, 0) << (7 - j);
-		return a;
-	}
+	// unsigned char* copiar(unsigned char* m){
+	// 	unsigned char *a;
+	// 		for (int j = 0; j < 8; j++)
+	// 			a = ((int) a) ^ CLOCK_KG(conf, 0, 0) << (7 - j);
+	// 	return a;
+	// }
 
 	fseek(exein, 0L, SEEK_END);
 	size_t tama = ftell(exein);
@@ -77,7 +78,7 @@ int main(int argc, char** argv) {
 	    n = fread(buff, 1, sizeof buff - 54, exein);
 
 	    if (n) {
-	    		encrypt_desencrypt_data(&conf, &iv, buff, aux, tama);
+	    		encrypt_desencrypt_data(&conf, iv, buff, aux, tama);
 	    		m = fwrite(aux, 1, n, exeout);
 	    }
 	    else   m = 0;
